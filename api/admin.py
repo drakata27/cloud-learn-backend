@@ -1,5 +1,14 @@
 from django.contrib import admin
-from .models import Topic
+from .models import Topic, User, Profile
+
+class UserAdmin(admin.ModelAdmin):
+    list_display=['username', 'email']
+
+class ProfileAdmin(admin.ModelAdmin):
+    list_editable=['verified']
+    list_display=['user','full_name', 'verified']
 
 # Register your models here.
 admin.site.register(Topic)
+admin.site.register(User, UserAdmin)
+admin.site.register(Profile, ProfileAdmin)
