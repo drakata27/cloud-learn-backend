@@ -9,6 +9,8 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from .utils import *
+
 # Create your views here.
 @api_view(['GET'])
 def get_routes(request):
@@ -27,9 +29,47 @@ def get_routes(request):
             'body': None,
             'description': 'Test Endpoint'
         },
+        {
+            'Endpoint': 'section',
+            'method': ['GET', 'POST'],
+            'title': None,
+            'body': None,
+            'description': 'Each section includes a topic'
+        },
+        {
+            'Endpoint': 'section/id/topic',
+            'method': ['GET', 'POST'],
+            'title': None,
+            'body': None,
+            'description': 'Each topic includes a subtopic'
+        },
+        {
+            'Endpoint': 'section/id/topic/id',
+            'method': ['GET', 'POST'],
+            'title': None,
+            'body': None,
+            'description': 'Subtopic for a particular topic'
+        },
     ]
 
     return Response(routes)
+
+# Content
+# GET Content
+@api_view(['GET', 'POST'])
+def get_sections(request):
+    if request.method == 'GET':
+        return get_sections_list(request)
+
+@api_view(['GET', 'POST'])
+def get_topics(request, section_id=None):
+    if request.method == 'GET':
+        return get_topics_list(request, section_id)
+
+@api_view(['GET', 'POST'])
+def get_subtopics(request, section_id=None, topic_id=None):
+    if request.method == 'GET':
+        return get_subtopics_list(request, section_id, topic_id)
 
 # Auth
 class MyTokenObtainPairView(TokenObtainPairView):

@@ -6,10 +6,32 @@ def upload_path(instance, filename):
     return '/'.join(['covers', str(instance.title), filename])
 
 # Create your models here.
+class Section(models.Model):
+    title = models.TextField(null=True, blank=True)
+    subtitle = models.TextField(null=True, blank=True)
+    cover = models.ImageField(blank=True, null=True, upload_to=upload_path, default='media/covers/default.jpg')
+
+    def __str__(self):
+        return self.title or "Untitled Section"
+
 class Topic(models.Model):
     title = models.TextField(null=True, blank=True)
     subtitle = models.TextField(null=True, blank=True)
     cover = models.ImageField(blank=True, null=True, upload_to=upload_path, default='media/covers/default.jpg')
+    section = models.ForeignKey(Section, related_name='topics', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title or "Untitled Topic"
+
+class Subtopic(models.Model):
+    title = models.TextField(null=True, blank=True)
+    subtitle = models.TextField(null=True, blank=True)
+    cover = models.ImageField(blank=True, null=True, upload_to=upload_path, default='media/covers/default.jpg')
+    body = models.TextField(null=True, blank=True)
+    topic = models.ForeignKey(Topic, related_name='subtopics', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title or "Untitled Subtopic"
 
 # Custom User
 class User(AbstractUser):

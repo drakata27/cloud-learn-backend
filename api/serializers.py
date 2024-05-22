@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+from .models import *
 from rest_framework_simplejwt.tokens import Token
 from .models import User, Profile
 
@@ -6,7 +7,22 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 
-# Auth
+# Content
+class SectionSerializer(ModelSerializer):
+    class Meta:
+        model = Section 
+        fields = '__all__'
+
+class TopicSerializer(ModelSerializer):
+    class Meta:
+        model = Topic 
+        fields = '__all__'
+
+class SubtopicSerializer(ModelSerializer):
+    class Meta:
+        model = Subtopic 
+        fields = '__all__'
+
 # Auth
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
