@@ -9,7 +9,7 @@ def upload_path(instance, filename):
 class Section(models.Model):
     title = models.TextField(null=True, blank=True)
     subtitle = models.TextField(null=True, blank=True)
-    cover = models.ImageField(blank=True, null=True, upload_to=upload_path, default='media/covers/default.jpg')
+    cover = models.ImageField(blank=True, null=True, upload_to=upload_path)
 
     def __str__(self):
         return self.title or "Untitled Section"
@@ -17,7 +17,7 @@ class Section(models.Model):
 class Topic(models.Model):
     title = models.TextField(null=True, blank=True)
     subtitle = models.TextField(null=True, blank=True)
-    cover = models.ImageField(blank=True, null=True, upload_to=upload_path, default='media/covers/default.jpg')
+    cover = models.ImageField(blank=True, null=True, upload_to=upload_path)
     section = models.ForeignKey(Section, related_name='topics', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -26,7 +26,7 @@ class Topic(models.Model):
 class Subtopic(models.Model):
     title = models.TextField(null=True, blank=True)
     subtitle = models.TextField(null=True, blank=True)
-    cover = models.ImageField(blank=True, null=True, upload_to=upload_path, default='media/covers/default.jpg')
+    cover = models.ImageField(blank=True, null=True, upload_to=upload_path)
     body = models.TextField(null=True, blank=True)
     topic = models.ForeignKey(Topic, related_name='subtopics', on_delete=models.CASCADE)
 
