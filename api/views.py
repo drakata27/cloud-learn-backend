@@ -60,6 +60,9 @@ def get_routes(request):
 def get_sections(request):
     if request.method == 'GET':
         return get_sections_list(request)
+    
+    if request.method == 'POST':
+        return create_section(request)
 
 @api_view(['GET', 'POST'])
 def get_topics(request, section_id=None):

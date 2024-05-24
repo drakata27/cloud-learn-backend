@@ -8,6 +8,17 @@ def get_sections_list(request):
     serializer = SectionSerializer(sections, many=True)
     return Response(serializer.data)
 
+def create_section(request):
+    data = request.data
+    section = Section.objects.create(
+        title=data['title'],
+        subtitle=data['subtitle'],
+        cover=data['cover']
+    )
+
+    serializer = SectionSerializer(section, many=False)
+    return Response(serializer.data)
+
 def get_topics_list(request, section_id):
     topics = Topic.objects.filter(section_id=section_id)
     serializer = TopicSerializer(topics, many=True)
