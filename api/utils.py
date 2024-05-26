@@ -3,6 +3,7 @@ from .serializers import *
 from rest_framework.response import Response
 import json
 
+# Section
 def get_sections_list(request):
     sections = Section.objects.all()
     serializer = SectionSerializer(sections, many=True)
@@ -19,6 +20,17 @@ def create_section(request):
     serializer = SectionSerializer(section, many=False)
     return Response(serializer.data)
 
+def get_section_detail(pk):
+    section = Section.objects.get(id=pk)
+    serializer = SectionSerializer(section, many=False)
+    return Response(serializer.data)
+
+def delete_section(request, pk):
+    section = Section.objects.get(id=pk)
+    section.delete()
+    return Response("Section was deleted")
+
+# Topic
 def get_topics_list(request, section_id):
     topics = Topic.objects.filter(section_id=section_id)
     serializer = TopicSerializer(topics, many=True)

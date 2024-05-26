@@ -64,6 +64,15 @@ def get_sections(request):
     if request.method == 'POST':
         return create_section(request)
 
+@api_view(['GET', 'DELETE'])
+def get_section(request, pk):
+    if request.method == 'GET':
+        return get_section_detail(pk)
+
+    if request.method == 'DELETE':
+        return delete_section(request, pk)
+
+
 @api_view(['GET', 'POST'])
 def get_topics(request, section_id=None):
     if request.method == 'GET':
