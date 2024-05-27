@@ -72,6 +72,9 @@ def get_section(request, pk):
     if request.method == 'DELETE':
         return delete_section(request, pk)
 
+@api_view(['PUT'])
+def update_section(request, pk):
+    return update_section_detail(request, pk)
 
 @api_view(['GET', 'POST'])
 def get_topics(request, section_id=None):

@@ -7,6 +7,7 @@ urlpatterns = [
     # Section
     path('section/', views.get_sections, name="sections"),
     path('section/<str:pk>/', views.get_section, name="section"),
+    path('section/<str:pk>/edit/', views.update_section, name="update_section"),
 
     # Topic
     path('section/<int:section_id>/topic/', views.get_topics, name="topics"),

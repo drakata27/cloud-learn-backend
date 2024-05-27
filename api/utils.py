@@ -30,6 +30,15 @@ def delete_section(request, pk):
     section.delete()
     return Response("Section was deleted")
 
+def update_section_detail(request, pk):
+    data = request.data
+    section = Section.objects.get(id=pk)
+    serializer = SectionSerializer(instance=section, data=data)
+
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
 # Topic
 def get_topics_list(request, section_id):
     topics = Topic.objects.filter(section_id=section_id)
