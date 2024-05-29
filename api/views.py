@@ -72,7 +72,7 @@ def get_section(request, pk):
     if request.method == 'DELETE':
         return delete_section(request, pk)
 
-@api_view(['PUT'])
+@api_view(['PUT', 'GET'])
 def update_section(request, pk):
     return update_section_detail(request, pk)
 
