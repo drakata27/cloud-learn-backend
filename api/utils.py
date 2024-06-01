@@ -18,6 +18,7 @@ def create_section(request):
     )
 
     serializer = SectionSerializer(section, many=False)
+    
     return Response(serializer.data)
 
 def get_section_detail(pk):
@@ -35,8 +36,11 @@ def update_section_detail(request, pk):
     section = Section.objects.get(id=pk)
     serializer = SectionSerializer(instance=section, data=data)
 
+    data['created_by']=User.objects.get()
     if serializer.is_valid():
         serializer.save()
+    else:
+        print("Serializer error", serializer.errors)
     return Response(serializer.data)
 
 # Topic

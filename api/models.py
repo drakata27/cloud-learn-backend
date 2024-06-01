@@ -1,37 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
-
-def upload_path(instance, filename):
-    return '/'.join(['covers', str(instance.title), filename])
-
-# Create your models here.
-class Section(models.Model):
-    title = models.TextField(null=True, blank=True)
-    subtitle = models.TextField(null=True, blank=True)
-    cover = models.ImageField(blank=True, null=True, upload_to=upload_path)
-
-    def __str__(self):
-        return self.title or "Untitled Section"
-
-class Topic(models.Model):
-    title = models.TextField(null=True, blank=True)
-    subtitle = models.TextField(null=True, blank=True)
-    cover = models.ImageField(blank=True, null=True, upload_to=upload_path)
-    section = models.ForeignKey(Section, related_name='topics', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.title or "Untitled Topic"
-
-class Subtopic(models.Model):
-    title = models.TextField(null=True, blank=True)
-    subtitle = models.TextField(null=True, blank=True)
-    cover = models.ImageField(blank=True, null=True, upload_to=upload_path)
-    body = models.TextField(null=True, blank=True)
-    topic = models.ForeignKey(Topic, related_name='subtopics', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.title or "Untitled Subtopic"
+from django.conf import settings
 
 # Custom User
 class User(AbstractUser):
@@ -67,3 +37,34 @@ post_save.connect(save_user_profile, sender=User)
 
 # def upload_path(instance, filename):
 #     return '/'.join(['covers', str(instance.title), filename])
+
+def upload_path(instance, filename):
+    return '/'.join(['covers', str(instance.title), filename])
+
+# Create your models here.
+class Section(models.Model):
+    title = models.TextField(null=True, blank=True)
+    subtitle = models.TextField(null=True, blank=True)
+    cover = models.ImageField(blank=True, null=True, upload_to=upload_path)
+
+    def __str__(self):
+        return self.title or "Untitled Section"
+
+class Topic(models.Model):
+    title = models.TextField(null=True, blank=True)
+    subtitle = models.TextField(null=True, blank=True)
+    cover = models.ImageField(blank=True, null=True, upload_to=upload_path)
+    section = models.ForeignKey(Section, related_name='topics', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title or "Untitled Topic"
+
+class Subtopic(models.Model):
+    title = models.TextField(null=True, blank=True)
+    subtitle = models.TextField(null=True, blank=True)
+    cover = models.ImageField(blank=True, null=True, upload_to=upload_path)
+    body = models.TextField(null=True, blank=True)
+    topic = models.ForeignKey(Topic, related_name='subtopics', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title or "Untitled Subtopic"

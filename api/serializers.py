@@ -8,10 +8,11 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 
 # Content
-class SectionSerializer(ModelSerializer):
+class SectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Section 
         fields = '__all__'
+
 
 class TopicSerializer(ModelSerializer):
     class Meta:
