@@ -11,6 +11,8 @@ urlpatterns = [
 
     # Topic
     path('section/<int:section_id>/topic/', views.get_topics, name="topics"),
+    
+    # Subtopic
     path('section/<int:section_id>/topic/<int:topic_id>/', views.get_subtopics, name="subtopics"),
 
     # Auth
