@@ -14,7 +14,7 @@ class SectionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class TopicSerializer(ModelSerializer):
+class TopicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Topic 
         fields = '__all__'

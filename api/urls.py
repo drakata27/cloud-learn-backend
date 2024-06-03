@@ -11,6 +11,8 @@ urlpatterns = [
 
     # Topic
     path('section/<int:section_id>/topic/', views.get_topics, name="topics"),
+    path('section/<int:section_id>/topic/<str:pk>/', views.get_topic, name="topic"),
+    path('section/<int:section_id>/topic/<str:pk>/edit/', views.update_topic, name="update_topic"),
     
     # Subtopic
     path('section/<int:section_id>/topic/<int:topic_id>/', views.get_subtopics, name="subtopics"),

@@ -55,7 +55,7 @@ def get_routes(request):
     return Response(routes)
 
 # Content
-# GET Content
+# Sections
 @api_view(['GET', 'POST'])
 def get_sections(request):
     if request.method == 'GET':
@@ -76,15 +76,34 @@ def get_section(request, pk):
 def update_section(request, pk):
     return update_section_detail(request, pk)
 
+# Topics
 @api_view(['GET', 'POST'])
 def get_topics(request, section_id=None):
     if request.method == 'GET':
         return get_topics_list(request, section_id)
+    
+    if request.method == 'POST':
+        return create_topic(request, section_id)
 
+@api_view(['GET', 'DELETE'])
+def get_topic(request, section_id, pk):
+    if request.method == 'GET':
+        return get_topic_detail(section_id, pk)
+
+    if request.method == 'DELETE':
+        return delete_topic(section_id, pk)
+    
+@api_view(['PUT', 'GET'])
+def update_topic(request, section_id, pk):
+    return update_topic_detail(request, section_id, pk)
+
+
+# Subtopics
 @api_view(['GET', 'POST'])
 def get_subtopics(request, section_id=None, topic_id=None):
     if request.method == 'GET':
         return get_subtopics_list(request, section_id, topic_id)
+
 
 # Auth
 class MyTokenObtainPairView(TokenObtainPairView):
