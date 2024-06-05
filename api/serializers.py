@@ -19,7 +19,7 @@ class TopicSerializer(serializers.ModelSerializer):
         model = Topic 
         fields = '__all__'
 
-class SubtopicSerializer(ModelSerializer):
+class SubtopicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subtopic 
         fields = '__all__'
