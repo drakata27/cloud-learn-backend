@@ -100,3 +100,19 @@ def get_subtopics_list(request, section_id, topic_id):
     )
     serializer = SubtopicSerializer(subtopics, many=True)
     return Response(serializer.data)
+
+def get_subtopic_detail(section_id, topic_id, pk):
+    section = Section.objects.get(id=section_id)
+    topic = Topic.objects.get(id=topic_id, section=section)
+    subtopic = Subtopic.objects.get(id=pk, topic=topic)
+
+    serializer = SubtopicSerializer(subtopic, many=False)
+    return Response(serializer.data)
+
+def delete_subtopic(section_id, topic_id, pk):
+    section = Section.objects.get(id=section_id)
+    topic = Topic.objects.get(id=topic_id, section=section)
+    subtopic = Subtopic.objects.get(id=pk, topic=topic)
+
+    subtopic.delete()
+    return Response({"message": "Subtopic was deleted"}, status=status.HTTP_204_NO_CONTENT)

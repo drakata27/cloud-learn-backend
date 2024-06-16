@@ -104,6 +104,14 @@ def get_subtopics(request, section_id=None, topic_id=None):
     if request.method == 'GET':
         return get_subtopics_list(request, section_id, topic_id)
 
+@api_view(['GET', 'DELETE'])
+def get_subtopic(request, section_id, topic_id, pk):
+    if request.method == 'GET':
+        return get_subtopic_detail(section_id, topic_id, pk)
+
+    if request.method == 'DELETE':
+        return delete_subtopic(section_id, topic_id, pk)
+
 
 # Auth
 class MyTokenObtainPairView(TokenObtainPairView):
