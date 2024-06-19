@@ -17,6 +17,7 @@ urlpatterns = [
     # Subtopic
     path('section/<int:section_id>/topic/<int:topic_id>/subtopic/', views.get_subtopics, name="subtopics"),
     path('section/<int:section_id>/topic/<int:topic_id>/subtopic/<str:pk>/', views.get_subtopic, name="subtopic"),
+    path('section/<int:section_id>/topic/<int:topic_id>/subtopic/<str:pk>/edit/', views.update_subtopic, name="update_subtopic"),
 
     # Auth
     path('token/', views.MyTokenObtainPairView.as_view(), name='token'),

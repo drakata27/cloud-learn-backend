@@ -116,3 +116,34 @@ def delete_subtopic(section_id, topic_id, pk):
 
     subtopic.delete()
     return Response({"message": "Subtopic was deleted"}, status=status.HTTP_204_NO_CONTENT)
+
+def create_subtopic(request, section_id, topic_id):
+    data = request.data
+    section = Section.objects.get(id=section_id)
+    topic = Topic.objects.get(id=topic_id, section=section)
+
+    subtopic = Subtopic.objects.create(
+        title=data['title'],
+        subtitle=data['subtitle'],
+        cover=data['cover'],
+        body=['body'],
+        topic=topic
+    )
+
+    serializer = SubtopicSerializer(subtopic, many=False)
+    return Response(serializer.data)
+
+# FIX
+def update_subtopic_detail(request, section_id, topic_id, pk):
+    data = request.data
+    section = Section.objects.get(id=section_id)
+    topic = Topic.objects.get(id=topic_id, section=section)
+    subtopic = Subtopic.objects.get(id=pk, topic=topic)
+
+    serializer = SubtopicSerializer(instance=subtopic, data=data)
+
+    if serializer.is_valid():
+        serializer.save()
+    else:
+        print("Serializer error", serializer.errors)
+    return Response(serializer.data)
