@@ -115,7 +115,6 @@ def get_subtopic(request, section_id, topic_id, pk):
     if request.method == 'DELETE':
         return delete_subtopic(section_id, topic_id, pk)
 
-# FIX
 @api_view(['PUT', 'GET'])
 def update_subtopic(request, section_id, topic_id, pk):
     return update_subtopic_detail(request, section_id, topic_id, pk)

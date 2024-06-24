@@ -133,7 +133,6 @@ def create_subtopic(request, section_id, topic_id):
     serializer = SubtopicSerializer(subtopic, many=False)
     return Response(serializer.data)
 
-# FIX
 def update_subtopic_detail(request, section_id, topic_id, pk):
     data = request.data
     section = Section.objects.get(id=section_id)
