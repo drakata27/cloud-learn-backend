@@ -126,7 +126,7 @@ def create_subtopic(request, section_id, topic_id):
         title=data['title'],
         subtitle=data['subtitle'],
         cover=data['cover'],
-        body=['body'],
+        body=data['body'],
         topic=topic
     )
 
@@ -143,6 +143,7 @@ def update_subtopic_detail(request, section_id, topic_id, pk):
 
     if serializer.is_valid():
         serializer.save()
+        print(data)
     else:
         print("Serializer error", serializer.errors)
     return Response(serializer.data)
