@@ -24,4 +24,7 @@ urlpatterns = [
     path('register/', views.RegisterView.as_view()),
     path('token/refresh/', TokenRefreshView.as_view(), name='refresh'),
     path('test/', views.test_endpoint, name="test"),
+
+    # Profiles
+    path('profiles/', views.get_profiles, name="profiles"),
 ]

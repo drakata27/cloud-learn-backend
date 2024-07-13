@@ -147,3 +147,9 @@ def update_subtopic_detail(request, section_id, topic_id, pk):
     else:
         print("Serializer error", serializer.errors)
     return Response(serializer.data)
+
+# Profiles
+def get_profiles_list(request):
+    profiles = Profile.objects.all()
+    serializer = ProfileSerializer(profiles, many=True)
+    return Response(serializer.data)

@@ -50,6 +50,13 @@ def get_routes(request):
             'body': None,
             'description': 'Subtopic for a particular topic'
         },
+        {
+            'Endpoint': 'register',
+            'method': ['POST', 'OPTIONS'],
+            'title': None,
+            'body': None,
+            'description': 'Register user'
+        },
     ]
 
     return Response(routes)
@@ -147,3 +154,8 @@ def test_endpoint(request):
         data = f"Hey {request.user}, this is POST data and your text is {text}"
         return Response( {'response':data}, status=status.HTTP_200_OK)
     return Response( {}, status=status.HTTP_400_BAD_REQUEST)
+
+# Profiles
+@api_view(['GET'])
+def get_profiles(request):
+    return get_profiles_list(request)

@@ -124,3 +124,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+    
+# Profiles
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile 
+        fields = '__all__'
