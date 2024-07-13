@@ -21,6 +21,7 @@ urlpatterns = [
 
     # Auth
     path('token/', views.MyTokenObtainPairView.as_view(), name='token'),
+    path('register/', views.RegisterView.as_view()),
     path('token/refresh/', TokenRefreshView.as_view(), name='refresh'),
     path('test/', views.test_endpoint, name="test"),
 ]

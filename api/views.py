@@ -5,8 +5,8 @@ from django.shortcuts import render
 from .serializers import MyTokenObtainPairSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import status, generics
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
 from .utils import *
@@ -123,6 +123,11 @@ def update_subtopic(request, section_id, topic_id, pk):
 # Auth
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = ([AllowAny])
+    serializer_class = RegisterSerializer
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
