@@ -159,3 +159,7 @@ def test_endpoint(request):
 @api_view(['GET'])
 def get_profiles(request):
     return get_profiles_list(request)
+
+@api_view(['GET'])
+def get_profile(request, username):
+    return get_profile_detail(username)

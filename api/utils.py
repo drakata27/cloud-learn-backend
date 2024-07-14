@@ -4,6 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status
 import json
 
+from .models import User
+from django.shortcuts import get_object_or_404
+
 # Section
 def get_sections_list(request):
     sections = Section.objects.all()
@@ -152,4 +155,10 @@ def update_subtopic_detail(request, section_id, topic_id, pk):
 def get_profiles_list(request):
     profiles = Profile.objects.all()
     serializer = ProfileSerializer(profiles, many=True)
+    return Response(serializer.data)
+
+def get_profile_detail(username):
+    user = get_object_or_404(User, username=username)
+    profile = get_object_or_404(Profile, user=user)
+    serializer = ProfileSerializer(profile, many=False)
     return Response(serializer.data)

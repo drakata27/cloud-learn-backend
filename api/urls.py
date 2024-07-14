@@ -27,4 +27,5 @@ urlpatterns = [
 
     # Profiles
     path('profiles/', views.get_profiles, name="profiles"),
+    path('<str:username>/', views.get_profile, name="profile"),
 ]
