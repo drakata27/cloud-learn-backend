@@ -18,7 +18,9 @@ def create_section(request):
     section = Section.objects.create(
         title=data['title'],
         subtitle=data['subtitle'],
-        cover=data['cover']
+        cover=data['cover'],
+        user=User.objects.get(id=data.get('user')),
+        username=data['username'],
     )
 
     serializer = SectionSerializer(section, many=False)
