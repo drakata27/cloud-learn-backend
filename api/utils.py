@@ -94,7 +94,7 @@ def update_topic_detail(request, section_id, pk):
     if serializer.is_valid():
         serializer.save()
     else:
-        print("Serializer error", serializer.errors)
+        print("(Topic) Serializer error", serializer.errors)
     return Response(serializer.data)
 
 # Subtopics
@@ -150,7 +150,7 @@ def update_subtopic_detail(request, section_id, topic_id, pk):
         serializer.save()
         print(data)
     else:
-        print("Serializer error", serializer.errors)
+        print("(Subtopic) Serializer error", serializer.errors)
     return Response(serializer.data)
 
 # Profiles

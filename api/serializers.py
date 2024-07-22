@@ -65,9 +65,9 @@ class SectionSerializer(serializers.ModelSerializer):
 
 
 class TopicSerializer(serializers.ModelSerializer):
-    cover = Base64ImageField(
-        max_length=None, use_url=True,
-    )
+    # cover = Base64ImageField(
+    #     max_length=None, use_url=True,
+    # )
 
     class Meta:
         model = Topic 
