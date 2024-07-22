@@ -74,6 +74,11 @@ class TopicSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SubtopicSerializer(serializers.ModelSerializer):
+    # cover = Base64ImageField(
+    #     max_length=None, use_url=True,
+    # )
+    cover = serializers.ImageField(required=False)
+
     class Meta:
         model = Subtopic 
         fields = '__all__'
