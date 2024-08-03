@@ -1,0 +1,21 @@
+services:
+  app:
+   build: .
+   volumes:
+   - .:/django
+   ports:
+    - "8000:8000"
+   environment:
+    - NAME=${NAME}
+    - USER_PSQL=${USER_PSQL}
+    - PASSWORD=${PASSWORD}
+    - PORT=${PORT}
+    - HOST=${HOST}
+    - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+    - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
+    - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+   image: application:django
+   container_name: app_container
+   command: gunicorn cloudlearnbackend.wsgi:application --bind 0.0.0.0:8000
+  
