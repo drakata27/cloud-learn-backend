@@ -18,4 +18,3 @@ services:
    image: application:django
    container_name: app_container
    command: gunicorn cloudlearnbackend.wsgi:application --bind 0.0.0.0:8000
-  
