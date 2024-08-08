@@ -25,7 +25,11 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='refresh'),
     path('test/', views.test_endpoint, name="test"),
 
+    # Health
+    path('health/', views.health, name="health"),
+    
     # Profiles
     path('profiles/', views.get_profiles, name="profiles"),
     path('<str:username>/', views.get_profile, name="profile"),
+
 ]

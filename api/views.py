@@ -53,10 +53,13 @@ def get_routes(request):
         {
             'Endpoint': 'register',
             'method': ['POST', 'OPTIONS'],
-            'title': None,
-            'body': None,
             'description': 'Register user'
         },
+        {
+            'Endpoint': 'health',
+            'method': 'GET',
+            'description': 'Health Check'
+        }
     ]
 
     return Response(routes)
@@ -155,6 +158,11 @@ def test_endpoint(request):
         return Response( {'response':data}, status=status.HTTP_200_OK)
     return Response( {}, status=status.HTTP_400_BAD_REQUEST)
 
+# Health
+@api_view(['GET'])
+def health(request):
+    return Response( {'response':'ok'}, status=status.HTTP_200_OK)
+
 # Profiles
 @api_view(['GET'])
 def get_profiles(request):
@@ -163,3 +171,4 @@ def get_profiles(request):
 @api_view(['GET'])
 def get_profile(request, username):
     return get_profile_detail(username)
+
