@@ -18,3 +18,16 @@ services:
    image: application:django
    container_name: app_container
    command: gunicorn cloudlearnbackend.wsgi:application --bind 0.0.0.0:8000
+  
+  # nginx:
+  #   build:
+  #     context: .
+  #     dockerfile: dockerfile-nginx
+  #   ports:
+  #     - "8000:80"
+  #   depends_on:
+  #     - app
+  #   volumes:
+  #     - ./static:/django/static
+  #     - ./media:/django/media
+  #   container_name: nginx_container
