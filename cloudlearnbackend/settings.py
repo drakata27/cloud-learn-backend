@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get("DEBUG", default=0))
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -95,7 +95,7 @@ else:
             'USER': os.environ.get('USER_PSQL'),
             'PASSWORD': os.environ.get('PASSWORD'),
             'HOST': os.environ.get('HOST'),
-            'PORT': os.environ.get('PORT'),
+            'PORT': os.environ.get('PORT', "5432"),
         }
     }
 

@@ -3,31 +3,17 @@ services:
    build: .
    volumes:
    - .:/django
-   ports:
-    - "8000:8000"
-   environment:
-    - NAME=${NAME}
-    - USER_PSQL=${USER_PSQL}
-    - PASSWORD=${PASSWORD}
-    - PORT=${PORT}
-    - HOST=${HOST}
-    - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-    - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-    - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
-    - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+   expose:
+    - 8000
+   env_file:
+    - ./.env
    image: application:django
    container_name: app_container
    command: gunicorn cloudlearnbackend.wsgi:application --bind 0.0.0.0:8000
   
-  # nginx:
-  #   build:
-  #     context: .
-  #     dockerfile: dockerfile-nginx
-  #   ports:
-  #     - "8000:80"
-  #   depends_on:
-  #     - app
-  #   volumes:
-  #     - ./static:/django/static
-  #     - ./media:/django/media
-  #   container_name: nginx_container
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - app
