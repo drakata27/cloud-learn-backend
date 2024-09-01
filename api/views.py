@@ -66,6 +66,10 @@ def get_routes(request):
 
 # Content
 # Sections
+@api_view(['GET'])
+def get_public_sections(request):
+    return get_public_sections_list(request)
+
 @api_view(['GET', 'POST'])
 def get_sections(request):
     if request.method == 'GET':

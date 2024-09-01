@@ -5,6 +5,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 urlpatterns = [
     path('', views.get_routes, name="routes"),
     # Section
+    path('public-section/', views.get_public_sections, name="public_sections"),
     path('section/', views.get_sections, name="sections"),
     path('section/<str:pk>/', views.get_section, name="section"),
     path('section/<str:pk>/edit/', views.update_section, name="update_section"),

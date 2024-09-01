@@ -8,6 +8,11 @@ from .models import User
 from django.shortcuts import get_object_or_404
 
 # Section
+def get_public_sections_list(request):
+    sections = Section.objects.filter(is_public=True)
+    serializer = SectionSerializer(sections, many=True)
+    return Response(serializer.data)
+
 def get_sections_list(request):
     sections = Section.objects.all()
     serializer = SectionSerializer(sections, many=True)
@@ -21,6 +26,7 @@ def create_section(request):
         cover=data['cover'],
         user=User.objects.get(id=data.get('user')),
         username=data['username'],
+        is_public=json.loads(request.POST.get('is_public', 'false'))
     )
 
     serializer = SectionSerializer(section, many=False)
