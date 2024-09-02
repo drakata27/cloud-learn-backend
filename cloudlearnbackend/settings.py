@@ -21,7 +21,11 @@ DEBUG = False
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS = [ '127.0.0.1']
+    ALLOWED_HOSTS = [
+        '127.0.0.1',
+        'api.skylearning.xyz',
+        '35.179.185.167'
+    ]
 
 # Application definition
 
