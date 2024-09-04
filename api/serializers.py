@@ -73,10 +73,12 @@ class TopicSerializer(serializers.ModelSerializer):
         model = Topic 
         fields = '__all__'
 
+class FlashCardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FlashCard 
+        fields = '__all__'
+
 class SubtopicSerializer(serializers.ModelSerializer):
-    # cover = Base64ImageField(
-    #     max_length=None, use_url=True,
-    # )
     cover = serializers.ImageField(required=False)
 
     class Meta:
