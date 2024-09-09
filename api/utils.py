@@ -159,6 +159,51 @@ def update_subtopic_detail(request, section_id, topic_id, pk):
         print("(Subtopic) Serializer error", serializer.errors)
     return Response(serializer.data)
 
+# Flash Card
+def get_flashcard_list(request, subtopic_id):
+    flash_cards = FlashCard.objects.filter(subtopic_id=subtopic_id)
+    serializer = FlashCardSerializer(flash_cards, many=True)
+    return Response(serializer.data)
+
+def get_flashcard_detail(request, pk):
+    flash_card = FlashCard.objects.get(id=pk)
+    serializer = FlashCardSerializer(flash_card, many=False)
+    return Response(serializer.data)
+
+def create_flashcard(request, subtopic_id):
+    data = request.data
+    subtopic = Subtopic.objects.get(id=subtopic_id)
+    flash_card = FlashCard.objects.create(
+        question = data['question'],
+        answer = data['answer'],
+        subtopic=subtopic
+    )
+    serializer = FlashCardSerializer(flash_card, many=False)
+    return Response(serializer.data)
+
+def delete_flashcard(request, pk):
+    flashcard = FlashCard.objects.get(id=pk)
+    flashcard.delete()
+    return Response(
+        {
+            "message":"Flash card was deleted"
+        }, 
+        status=status.HTTP_204_NO_CONTENT
+    ) 
+
+def update_flashcard_detail(request, pk):
+    data = request.data
+    flashcard = FlashCard.objects.get(id=pk)
+    serializer = FlashCardSerializer(flashcard, data=data)
+
+    if serializer.is_valid():
+        serializer.save()
+        print(data)
+    else:
+        print("(Flash Card) Serializer error", serializer.errors)
+    return Response(serializer.data)
+
+
 # Profiles
 def get_profiles_list(request):
     profiles = Profile.objects.all()

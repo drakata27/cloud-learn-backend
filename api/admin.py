@@ -12,5 +12,6 @@ class ProfileAdmin(admin.ModelAdmin):
 admin.site.register(Section)
 admin.site.register(Topic)
 admin.site.register(Subtopic)
+admin.site.register(FlashCard)
 admin.site.register(User, UserAdmin)
 admin.site.register(Profile, ProfileAdmin)

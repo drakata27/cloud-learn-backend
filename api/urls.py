@@ -20,6 +20,11 @@ urlpatterns = [
     path('section/<int:section_id>/topic/<int:topic_id>/subtopic/<str:pk>/', views.get_subtopic, name="subtopic"),
     path('section/<int:section_id>/topic/<int:topic_id>/subtopic/<str:pk>/edit/', views.update_subtopic, name="update_subtopic"),
 
+    # Flash Card
+    path('subtopic/<str:subtopic_id>/flashcard/', views.get_flashcards, name="flash_cards"),
+    path('subtopic/<str:subtopic_id>/flashcard/<str:pk>/', views.get_flashcard, name="flash_card"),
+    path('subtopic/<str:subtopic_id>/flashcard/<str:pk>/edit/', views.update_flashcard, name="update_flash_card"),
+
     # Auth
     path('token/', views.MyTokenObtainPairView.as_view(), name='token'),
     path('register/', views.RegisterView.as_view()),

@@ -133,6 +133,26 @@ def get_subtopic(request, section_id, topic_id, pk):
 def update_subtopic(request, section_id, topic_id, pk):
     return update_subtopic_detail(request, section_id, topic_id, pk)
 
+# Flash Cards
+@api_view(['GET', 'POST'])
+def get_flashcards(request, subtopic_id=None):
+    if request.method == 'GET':
+        return get_flashcard_list(request, subtopic_id)
+    
+    if request.method == 'POST':
+        return create_flashcard(request, subtopic_id)
+    
+@api_view(['GET', 'DELETE'])
+def get_flashcard(request, pk, subtopic_id):
+    if request.method == 'GET':
+        return get_flashcard_detail(request, pk)
+
+    if request.method == 'DELETE':
+        return delete_flashcard(request, pk)
+
+@api_view(['PUT', 'GET'])
+def update_flashcard(request, pk, subtopic_id):
+    return update_flashcard_detail(request, pk)
 
 # Auth
 class MyTokenObtainPairView(TokenObtainPairView):

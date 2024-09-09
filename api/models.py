@@ -59,6 +59,7 @@ class Topic(models.Model):
     def __str__(self):
         return self.title or "Untitled Topic"
 
+    
 class Subtopic(models.Model):
     title = models.TextField(null=True, blank=True)
     subtitle = models.TextField(null=True, blank=True)
@@ -68,3 +69,11 @@ class Subtopic(models.Model):
 
     def __str__(self):
         return self.title or "Untitled Subtopic"
+    
+class FlashCard(models.Model):
+    subtopic = models.ForeignKey(Subtopic, related_name="subtopics", on_delete=models.CASCADE)
+    question = models.TextField(null=True, blank=True)
+    answer = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.question or "Untitled Flash Card"
