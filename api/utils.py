@@ -134,6 +134,7 @@ def create_subtopic(request, section_id, topic_id):
     topic = Topic.objects.get(id=topic_id, section=section)
 
     subtopic = Subtopic.objects.create(
+        user=User.objects.get(id=data.get('user')),
         title=data['title'],
         subtitle=data['subtitle'],
         cover=data['cover'],

@@ -150,6 +150,8 @@ else:
         "https://skylearning.xyz",
     ]
 
+CSRF_TRUSTED_ORIGINS = ['https://api.skylearning.xyz']
+
 
 AUTH_USER_MODEL = 'api.User'
 
