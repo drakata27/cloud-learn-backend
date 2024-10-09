@@ -216,3 +216,16 @@ def get_profile_detail(username):
     profile = get_object_or_404(Profile, user=user)
     serializer = ProfileSerializer(profile, many=False)
     return Response(serializer.data)
+
+def update_profile_detail(request, pk):
+    data = request.data
+    print("Incoming data:", data)
+    profile = Profile.objects.get(id=pk)
+    serializer = ProfileSerializer(profile, data=data)
+
+    if serializer.is_valid():
+        serializer.save()
+        print(data)
+    else:
+        print("(Profile) Serializer error", serializer.errors)
+    return Response(serializer.data)

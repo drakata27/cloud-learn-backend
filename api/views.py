@@ -196,3 +196,7 @@ def get_profiles(request):
 def get_profile(request, username):
     return get_profile_detail(username)
 
+@api_view(['PUT', 'GET'])
+def update_profile(request, pk):
+    return update_profile_detail(request, pk)
+

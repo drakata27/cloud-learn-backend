@@ -3,6 +3,13 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.conf import settings
 
+
+def upload_path(instance, filename):
+    return '/'.join(['covers', str(instance.title), filename])
+
+def user_upload_path(instance, filename):
+    return '/'.join(['covers', str(instance.user), filename])
+
 # Custom User
 class User(AbstractUser):
     username = models.CharField(max_length=100)
@@ -19,7 +26,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=300)
     bio = models.CharField(max_length=300)
-    image = models.ImageField(default="default.jpg", upload_to='user_images')
+    # image = models.ImageField(default="default.jpg", upload_to='user_images', null=True, blank=True)
+    image = models.ImageField(blank=True, null=True, upload_to=user_upload_path)
     verified = models.BooleanField(default=False)
 
     def __str__(self) -> str:
@@ -34,9 +42,6 @@ def save_user_profile(sender, instance, **kwargs):
 
 post_save.connect(create_user_profile, sender=User)
 post_save.connect(save_user_profile, sender=User)
-
-def upload_path(instance, filename):
-    return '/'.join(['covers', str(instance.title), filename])
 
 # Create your models here.
 class Section(models.Model):

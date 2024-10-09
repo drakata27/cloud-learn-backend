@@ -134,6 +134,10 @@ class RegisterSerializer(serializers.ModelSerializer):
     
 # Profiles
 class ProfileSerializer(serializers.ModelSerializer):
+    # image = Base64ImageField(
+    #     max_length=None, use_url=True,
+    # )
+
     class Meta:
         model = Profile 
         fields = '__all__'
